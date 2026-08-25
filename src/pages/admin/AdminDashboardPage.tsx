@@ -29,7 +29,7 @@ export const AdminDashboardPage: React.FC = () => {
   return (
     <AppLayout
       pageTitle="Agronomic Admin & Laboratory Portal"
-      pageSubtitle={`Dr. Sarah Vance • Central Pathology Research Network (${totalRegisteredFarms} Enterprise Farms Connected)`}
+      pageSubtitle={`${user?.name || 'Administrator'} • Central Pathology Research Network (${totalRegisteredFarms} Enterprise Farms Connected)`}
     >
       <div className="space-y-6">
         

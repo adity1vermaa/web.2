@@ -31,7 +31,23 @@ import { AdminFarmsPage } from './pages/admin/AdminFarmsPage';
 
 const AppRoutes: React.FC = () => {
   const { currentPath, navigate } = useRouter();
-  const { user, isAuthenticated, isAdmin } = useAuth();
+  const { user, isAuthenticated, isAdmin, isLoading } = useAuth();
+
+  // If initial auth session is being restored from Supabase, display clean loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-slate-950 flex items-center justify-center text-slate-100 font-sans">
+        <div className="flex flex-col items-center gap-3">
+          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-lime-400 p-0.5 animate-pulse shadow-lg shadow-emerald-950">
+            <div className="w-full h-full bg-slate-950 rounded-[10px] flex items-center justify-center">
+              <span className="w-2.5 h-2.5 rounded-full bg-lime-400 animate-ping"></span>
+            </div>
+          </div>
+          <p className="text-xs text-slate-400 font-medium">Securing session...</p>
+        </div>
+      </div>
+    );
+  }
 
   // Route Dispatcher
   const renderRoute = () => {
@@ -61,7 +77,7 @@ const AppRoutes: React.FC = () => {
       return <OnboardingPage />;
     }
 
-    // 2. Admin Protected Routes
+    // 2. Admin Protected Routes (Require Authenticated + Role === 'admin')
     if (currentPath.startsWith('/admin')) {
       if (!isAuthenticated) {
         return <LoginPage />;
@@ -83,7 +99,7 @@ const AppRoutes: React.FC = () => {
       return <AdminDashboardPage />;
     }
 
-    // 3. Grower / Farm Protected Routes
+    // 3. Grower / Farm Protected Routes (Require Authenticated)
     if (!isAuthenticated) {
       return <LoginPage />;
     }

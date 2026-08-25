@@ -18,12 +18,12 @@ export const SettingsPage: React.FC = () => {
   const { user, updateProfile } = useAuth();
 
   const [formData, setFormData] = useState({
-    name: user?.name || 'Ethan Gallagher',
-    farmName: user?.farmName || 'Highland Farms & Vineyards',
-    location: user?.location || 'Willamette Valley, OR',
-    farmSize: user?.farmSize || 340,
+    name: user?.name || '',
+    farmName: user?.farmName || '',
+    location: user?.location || '',
+    farmSize: user?.farmSize || 0,
     country: user?.country || 'United States',
-    units: 'metric',
+    units: user?.unit || 'metric',
     emailAlerts: true,
     frostPushNotifications: true,
     satelliteSyncFrequency: '5-days',

@@ -5,12 +5,11 @@ import { useFarm } from '../context/FarmContext';
 import { 
   Sprout, 
   ShieldCheck, 
-  User, 
+  User as UserIcon, 
   LogOut, 
   LayoutDashboard, 
   ScanLine, 
   Bell, 
-  Compass, 
   ChevronRight,
   Sparkles,
   Layers
@@ -18,8 +17,13 @@ import {
 
 export const Navbar: React.FC = () => {
   const { currentPath, navigate } = useRouter();
-  const { user, isAuthenticated, isAdmin, logout, quickLoginAs } = useAuth();
+  const { user, isAuthenticated, isAdmin, logout } = useAuth();
   const { unreadAlertCount } = useFarm();
+
+  const handleLogout = async () => {
+    await logout();
+    navigate('/login');
+  };
 
   const isPublicPage = ['/', '/about', '/privacy', '/terms', '/login', '/signup', '/forgot-password'].includes(currentPath);
 
@@ -48,9 +52,9 @@ export const Navbar: React.FC = () => {
             </div>
           </div>
 
-          {/* Center Navigation Links (for Public or Quick App access) */}
+          {/* Center Navigation Links (Public vs Authenticated) */}
           <nav className="hidden md:flex items-center gap-1">
-            {isPublicPage ? (
+            {!isAuthenticated ? (
               <>
                 <button
                   onClick={() => navigate('/')}
@@ -140,38 +144,10 @@ export const Navbar: React.FC = () => {
             )}
           </nav>
 
-          {/* Right Section: Role Quick-Switcher & Auth Action */}
-          <div className="flex items-center gap-2.5">
-            {/* Quick Demo Switcher */}
-            <div className="hidden sm:flex items-center bg-emerald-900/60 border border-emerald-700/50 rounded-lg p-0.5 text-xs">
-              <button
-                onClick={() => quickLoginAs('farmer')}
-                className={`px-2.5 py-1 rounded font-medium transition-all ${
-                  isAuthenticated && !isAdmin
-                    ? 'bg-emerald-600 text-white shadow-sm'
-                    : 'text-emerald-300/70 hover:text-white'
-                }`}
-                title="Switch to Farmer Portal"
-                id="role-switch-farmer"
-              >
-                Farmer
-              </button>
-              <button
-                onClick={() => quickLoginAs('admin')}
-                className={`px-2.5 py-1 rounded font-medium transition-all ${
-                  isAdmin
-                    ? 'bg-amber-600 text-white shadow-sm'
-                    : 'text-emerald-300/70 hover:text-white'
-                }`}
-                title="Switch to Admin Portal"
-                id="role-switch-admin"
-              >
-                Admin
-              </button>
-            </div>
-
-            {isAuthenticated ? (
-              <div className="flex items-center gap-2">
+          {/* Right Section: Authenticated User Controls OR Public Sign In */}
+          <div className="flex items-center gap-3">
+            {isAuthenticated && user ? (
+              <div className="flex items-center gap-3">
                 {isAdmin ? (
                   <button
                     onClick={() => navigate('/admin/dashboard')}
@@ -179,7 +155,7 @@ export const Navbar: React.FC = () => {
                     id="admin-portal-link"
                   >
                     <ShieldCheck className="w-3.5 h-3.5" />
-                    Admin Portal
+                    <span>Admin Portal</span>
                   </button>
                 ) : (
                   <button
@@ -188,29 +164,37 @@ export const Navbar: React.FC = () => {
                     id="quick-scan-top-btn"
                   >
                     <Sparkles className="w-3.5 h-3.5" />
-                    Scan Crop
+                    <span>Scan Crop</span>
                   </button>
                 )}
 
+                {/* Profile Pill */}
                 <div 
-                  onClick={() => navigate('/settings')}
+                  onClick={() => navigate(isAdmin ? '/admin/dashboard' : '/settings')}
                   className="flex items-center gap-2 cursor-pointer p-1 rounded-lg hover:bg-emerald-900/40 transition-colors"
                   id="user-profile-widget"
-                  title={`${user?.name} (${user?.role})`}
+                  title={`${user.name} (${user.role})`}
                 >
-                  <img
-                    src={user?.avatarUrl || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'}
-                    alt={user?.name}
-                    className="w-8 h-8 rounded-full object-cover border border-emerald-500/40"
-                  />
+                  {user.avatarUrl ? (
+                    <img
+                      src={user.avatarUrl}
+                      alt={user.name}
+                      className="w-8 h-8 rounded-full object-cover border border-emerald-500/40"
+                    />
+                  ) : (
+                    <div className="w-8 h-8 rounded-full bg-emerald-800 border border-emerald-500/40 flex items-center justify-center text-xs font-bold text-white uppercase">
+                      {user.name.charAt(0) || 'U'}
+                    </div>
+                  )}
                   <div className="hidden lg:block text-left">
-                    <p className="text-xs font-medium text-white truncate max-w-[100px]">{user?.name}</p>
-                    <p className="text-[10px] text-emerald-300/70 capitalize">{user?.role}</p>
+                    <p className="text-xs font-medium text-white truncate max-w-[120px]">{user.name}</p>
+                    <p className="text-[10px] text-emerald-300/70 capitalize">{user.role}</p>
                   </div>
                 </div>
 
+                {/* Sign Out Button */}
                 <button
-                  onClick={logout}
+                  onClick={handleLogout}
                   className="p-1.5 rounded-lg text-emerald-300/70 hover:text-red-400 hover:bg-emerald-900/60 transition-colors"
                   title="Sign Out"
                   id="logout-btn"
@@ -232,7 +216,7 @@ export const Navbar: React.FC = () => {
                   className="px-4 py-1.5 rounded-lg bg-lime-400 hover:bg-lime-300 text-emerald-950 font-semibold text-sm shadow-sm transition-all flex items-center gap-1"
                   id="header-signup-btn"
                 >
-                  Get Started
+                  <span>Get Started</span>
                   <ChevronRight className="w-4 h-4" />
                 </button>
               </div>

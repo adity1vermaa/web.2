@@ -20,25 +20,25 @@ export const SignUpPage: React.FC = () => {
   const { register } = useAuth();
 
   const [formData, setFormData] = useState({
-    name: 'Marcus Sterling',
-    email: 'marcus@silvercreek.ag',
-    password: 'agrivision2026',
-    farmName: 'Silver Creek Farms',
+    name: '',
+    email: '',
+    password: '',
+    farmName: '',
     farmType: 'Mixed Farming' as const,
-    farmSize: 280,
-    location: 'Salinas Valley, CA',
+    farmSize: 100,
+    location: '',
     country: 'United States',
-    acceptTerms: true,
+    acceptTerms: false,
   });
 
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!formData.name || !formData.email || !formData.password || !formData.farmName) {
+    if (!formData.name.trim() || !formData.email.trim() || !formData.password.trim() || !formData.farmName.trim()) {
       setError('Please fill in all required fields.');
       return;
     }
@@ -49,19 +49,23 @@ export const SignUpPage: React.FC = () => {
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      register({
-        name: formData.name,
-        email: formData.email,
-        farmName: formData.farmName,
-        farmType: formData.farmType,
-        farmSize: Number(formData.farmSize) || 100,
-        location: formData.location,
-        country: formData.country,
-      });
+    const result = await register({
+      name: formData.name.trim(),
+      email: formData.email.trim(),
+      password: formData.password,
+      farmName: formData.farmName.trim(),
+      farmType: formData.farmType,
+      farmSize: Number(formData.farmSize) || 100,
+      location: formData.location.trim(),
+      country: formData.country,
+    });
+    setIsLoading(false);
+
+    if (result.success) {
       navigate('/onboarding');
-    }, 400);
+    } else {
+      setError(result.error || 'Registration failed. Please try again.');
+    }
   };
 
   return (

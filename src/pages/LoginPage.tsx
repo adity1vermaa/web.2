@@ -8,52 +8,48 @@ import {
   Lock, 
   Mail, 
   ArrowRight, 
-  ShieldCheck, 
-  User, 
-  Zap, 
   CheckCircle2,
   AlertCircle
 } from 'lucide-react';
 
 export const LoginPage: React.FC = () => {
   const { navigate } = useRouter();
-  const { login, quickLoginAs } = useAuth();
+  const { login } = useAuth();
 
-  const [email, setEmail] = useState('ethan@highlandfarms.ag');
-  const [password, setPassword] = useState('agrivision2026');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(true);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
 
-    if (!email || !password) {
+    if (!email.trim() || !password.trim()) {
       setError('Please provide both email and password.');
       return;
     }
 
     setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-      if (email.toLowerCase().includes('admin') || email.toLowerCase().includes('sarah')) {
-        login(email, 'admin');
+    const result = await login(email.trim(), password);
+    setIsLoading(false);
+
+    if (result.success) {
+      if (email.toLowerCase().includes('admin')) {
         navigate('/admin/dashboard');
       } else {
-        login(email, 'farmer');
         navigate('/dashboard');
       }
-    }, 400);
+    } else {
+      setError(result.error || 'Authentication failed. Please verify your credentials.');
+    }
   };
 
-  const handleDemoClick = (role: 'farmer' | 'admin') => {
-    quickLoginAs(role);
-    if (role === 'admin') {
-      navigate('/admin/dashboard');
-    } else {
-      navigate('/dashboard');
-    }
+  const handleFillTestAccount = (testEmail: string, testPass: string) => {
+    setEmail(testEmail);
+    setPassword(testPass);
+    setError('');
   };
 
   return (
@@ -74,33 +70,28 @@ export const LoginPage: React.FC = () => {
             <p className="text-xs text-slate-400">Precision Crop Diagnostics & Farm Management Portal</p>
           </div>
 
-          {/* Quick 1-Click Demo Accounts */}
-          <div className="p-4 rounded-xl bg-slate-900/90 border border-slate-800 space-y-2.5">
-            <div className="flex items-center justify-between text-[11px] font-semibold text-slate-300">
-              <span className="flex items-center gap-1.5 text-lime-400">
-                <Zap className="w-3.5 h-3.5" />
-                Instant Demo Access
-              </span>
-              <span className="text-[10px] text-slate-400">No registration needed</span>
+          {/* Quick Fill Test Credentials Helper */}
+          <div className="p-3.5 rounded-xl bg-slate-900/80 border border-slate-800 space-y-2 text-xs">
+            <div className="flex items-center justify-between text-slate-400">
+              <span className="font-semibold text-slate-300">Quick Test Credentials:</span>
+              <span>Click to auto-fill</span>
             </div>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="flex gap-2">
               <button
                 type="button"
-                onClick={() => handleDemoClick('farmer')}
-                className="px-3 py-2 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/50 text-left transition-all text-xs group"
-                id="demo-farmer-login-btn"
+                onClick={() => handleFillTestAccount('farmer@agrivision.ai', 'agrivision2026')}
+                className="flex-1 px-2.5 py-1.5 rounded-lg bg-emerald-950/60 hover:bg-emerald-900/80 border border-emerald-700/40 text-emerald-300 font-medium text-[11px] text-center transition-colors"
+                id="fill-farmer-account-btn"
               >
-                <p className="font-semibold text-white group-hover:text-lime-300">Commercial Grower</p>
-                <p className="text-[10px] text-emerald-300/70 truncate">Ethan • 340 ha Farm</p>
+                Grower Account
               </button>
               <button
                 type="button"
-                onClick={() => handleDemoClick('admin')}
-                className="px-3 py-2 rounded-lg bg-amber-950/40 hover:bg-amber-900/60 border border-amber-700/50 text-left transition-all text-xs group"
-                id="demo-admin-login-btn"
+                onClick={() => handleFillTestAccount('admin@agrivision.ai', 'agrivision2026')}
+                className="flex-1 px-2.5 py-1.5 rounded-lg bg-amber-950/40 hover:bg-amber-900/60 border border-amber-700/40 text-amber-300 font-medium text-[11px] text-center transition-colors"
+                id="fill-admin-account-btn"
               >
-                <p className="font-semibold text-white group-hover:text-amber-300">Agronomist Admin</p>
-                <p className="text-[10px] text-amber-300/70 truncate">Dr. Vance • Pathology Lab</p>
+                Agronomist Admin
               </button>
             </div>
           </div>
@@ -181,7 +172,7 @@ export const LoginPage: React.FC = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-slate-950 font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 rounded-lg bg-gradient-to-r from-emerald-500 to-lime-400 hover:from-emerald-400 hover:to-lime-300 text-slate-950 font-bold text-xs shadow-md transition-all flex items-center justify-center gap-2 disabled:opacity-60"
                 id="login-submit-btn"
               >
                 {isLoading ? (

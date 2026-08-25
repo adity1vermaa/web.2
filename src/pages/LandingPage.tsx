@@ -26,7 +26,6 @@ import { SAMPLE_DISEASE_IMAGES } from '../data/mockData';
 
 export const LandingPage: React.FC = () => {
   const { navigate } = useRouter();
-  const { quickLoginAs } = useAuth();
   const [selectedDemoIndex, setSelectedDemoIndex] = useState(0);
   const activeDemo = SAMPLE_DISEASE_IMAGES[selectedDemoIndex];
 
@@ -79,15 +78,12 @@ export const LandingPage: React.FC = () => {
                 </button>
 
                 <button
-                  onClick={() => {
-                    quickLoginAs('farmer');
-                    navigate('/dashboard');
-                  }}
-                  className="px-4 py-3.5 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-700/40 text-emerald-300 font-semibold text-sm transition-colors flex items-center gap-1.5"
-                  id="hero-instant-demo-btn"
+                  onClick={() => navigate('/about')}
+                  className="px-5 py-3.5 rounded-xl bg-emerald-950/60 hover:bg-emerald-900/60 border border-emerald-700/40 text-emerald-300 font-semibold text-sm transition-colors flex items-center gap-1.5"
+                  id="hero-learn-more-btn"
                 >
-                  <Zap className="w-4 h-4 text-lime-400" />
-                  <span>Instant Live Demo</span>
+                  <Sparkles className="w-4 h-4 text-lime-400" />
+                  <span>Learn More</span>
                 </button>
               </div>
 

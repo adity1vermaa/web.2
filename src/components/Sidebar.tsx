@@ -69,10 +69,10 @@ export const Sidebar: React.FC<SidebarProps> = () => {
           </div>
           <div className="min-w-0 flex-1">
             <h3 className="text-xs font-semibold text-white truncate">
-              {isAdmin ? 'System Admin Center' : (user?.farmName || 'Highland Farm')}
+              {isAdmin ? 'System Admin Center' : (user?.farmName || 'My Farm')}
             </h3>
             <p className="text-[11px] text-slate-400 truncate">
-              {isAdmin ? 'AgriVision AI Core' : `${user?.farmSize || 340} ha • ${user?.location || 'Willamette Valley'}`}
+              {isAdmin ? 'AgriVision AI Core' : `${user?.farmSize ?? 0} ha • ${user?.location || 'Agricultural Basin'}`}
             </p>
           </div>
         </div>

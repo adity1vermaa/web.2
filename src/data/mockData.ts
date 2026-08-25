@@ -1,37 +1,5 @@
 import { CropScan, FieldPlot, AgroAlert, WeatherData, MarketCommodity, DiseaseKnowledgeItem, User } from '../types';
 
-export const INITIAL_USER: User = {
-  id: 'usr-farmer-01',
-  name: 'Ethan Gallagher',
-  email: 'ethan@highlandfarms.ag',
-  role: 'farmer',
-  farmName: 'Highland Valley Agro Estates',
-  farmType: 'Mixed Farming',
-  farmSize: 340,
-  unit: 'metric',
-  location: 'Willamette Valley, OR',
-  country: 'United States',
-  avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
-  subscriptionTier: 'Pro Agronomist',
-  createdAt: '2025-03-15',
-};
-
-export const ADMIN_USER: User = {
-  id: 'usr-admin-01',
-  name: 'Dr. Sarah Vance',
-  email: 'sarah.vance@agrivision.ai',
-  role: 'admin',
-  farmName: 'Global Agronomy Operations',
-  farmType: 'Arable Crops',
-  farmSize: 12500,
-  unit: 'metric',
-  location: 'AgriTech Central Hub',
-  country: 'United States',
-  avatarUrl: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80',
-  subscriptionTier: 'Enterprise Farm',
-  createdAt: '2024-01-10',
-};
-
 export const SAMPLE_DISEASE_IMAGES = [
   {
     id: 'sample-tomato-blight',
@@ -653,7 +621,7 @@ export const MOCK_FARMS_LIST = [
   {
     id: 'farm-01',
     name: 'Highland Valley Agro Estates',
-    owner: 'Ethan Gallagher',
+    owner: 'Liam Sterling',
     location: 'Willamette Valley, OR',
     size: 340,
     crops: ['Corn', 'Tomato', 'Grapevine'],

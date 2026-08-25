@@ -37,8 +37,8 @@ export const DashboardPage: React.FC = () => {
 
   return (
     <AppLayout
-      pageTitle={`Welcome back, ${user?.name.split(' ')[0] || 'Grower'}`}
-      pageSubtitle={`${user?.farmName || 'Highland Valley Farm'} • ${totalAcreage.toFixed(1)} ha Managed`}
+      pageTitle={`Welcome back, ${user?.name ? user.name.split(' ')[0] : 'Grower'}`}
+      pageSubtitle={`${user?.farmName || 'My Farm'} • ${totalAcreage.toFixed(1)} ha Managed`}
     >
       <div className="space-y-6">
         
