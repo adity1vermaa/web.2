@@ -1,0 +1,11 @@
+{
+  "name": "AgriVision AI",
+  "description": "AI-Powered Precision Agriculture, Crop Health Diagnostics, Microclimate Intelligence & Farm Management Platform",
+  "requestFramePermissions": [
+    "camera",
+    "geolocation"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
