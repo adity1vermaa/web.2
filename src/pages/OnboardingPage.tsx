@@ -197,7 +197,7 @@ export const OnboardingPage: React.FC = () => {
                 </div>
                 <h2 className="text-xl font-bold text-white">Select Primary Crops Under Management</h2>
                 <p className="text-xs text-slate-400">
-                  Gemini Vision will automatically prioritize disease diagnostic models for these cultivars.
+                  AgriVision will automatically prioritize pathology diagnostic models for these cultivars.
                 </p>
               </div>
 

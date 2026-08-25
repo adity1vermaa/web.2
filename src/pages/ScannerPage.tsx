@@ -223,7 +223,7 @@ export const ScannerPage: React.FC = () => {
                       <RefreshCw className="w-8 h-8 animate-spin" />
                       <div className="text-center">
                         <p className="text-xs font-bold text-white">Extracting Pathology Vectors...</p>
-                        <p className="text-[10px] text-slate-400">Consulting Gemini 3.7 Vision Engine</p>
+                        <p className="text-[10px] text-slate-400">Consulting Vision Diagnostic Engine (Prototype)</p>
                       </div>
                     </div>
                   )}

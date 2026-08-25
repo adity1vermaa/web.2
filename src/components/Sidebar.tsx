@@ -42,7 +42,7 @@ export const Sidebar: React.FC<SidebarProps> = () => {
       count: unreadAlertCount > 0 ? unreadAlertCount : undefined 
     },
     { label: 'Yield & Market Analytics', path: '/analytics', icon: TrendingUp },
-    { label: 'AI Agronomist Chat', path: '/advisor', icon: BotMessageSquare, badge: 'Gemini' },
+    { label: 'AI Agronomist Chat', path: '/advisor', icon: BotMessageSquare, badge: 'AI' },
     { label: 'Scan & Treatment Logs', path: '/history', icon: History },
     { label: 'Farm Settings', path: '/settings', icon: Settings },
   ];

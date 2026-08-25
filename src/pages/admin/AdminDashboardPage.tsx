@@ -46,21 +46,20 @@ export const AdminDashboardPage: React.FC = () => {
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
-            <span className="text-xs text-slate-400 font-semibold">Vision Model Accuracy</span>
+            <span className="text-xs text-slate-400 font-semibold">Vision Model Evaluation</span>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-lime-400">99.2%</span>
-              <span className="text-xs text-slate-400 font-mono">F1-Score</span>
+              <span className="text-2xl font-extrabold text-lime-400">Experimental</span>
             </div>
-            <p className="text-[11px] text-slate-400">Gemini 3.7 Pathology fine-tune</p>
+            <p className="text-[11px] text-slate-400">Prototype benchmark in progress</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">
             <span className="text-xs text-slate-400 font-semibold">Inference Latency</span>
             <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-extrabold text-teal-400">1.42s</span>
-              <span className="text-xs text-teal-400 font-medium ml-auto">P95 Time</span>
+              <span className="text-2xl font-extrabold text-teal-400">Variable</span>
+              <span className="text-xs text-teal-400 font-medium ml-auto">Demo Mode</span>
             </div>
-            <p className="text-[11px] text-slate-400">Edge CDN distributed processing</p>
+            <p className="text-[11px] text-slate-400">Response time varies by network</p>
           </div>
 
           <div className="p-5 rounded-2xl bg-slate-900 border border-slate-800 space-y-2">

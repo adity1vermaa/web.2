@@ -68,7 +68,7 @@ export const PrivacyPage: React.FC = () => {
           <div className="space-y-2">
             <h3 className="text-sm font-bold text-white">3. How AI Models Use Imagery</h3>
             <p className="text-slate-400">
-              Diagnostic crop images processed via Gemini Multimodal Vision are analyzed ephemerally for disease symptom extraction. Anonymized, feature-extracted vectors may be utilized strictly to benchmark classification accuracy and detect emerging regional plant epidemics.
+              Diagnostic crop images processed via computer vision diagnostic services are analyzed ephemerally for disease symptom extraction. Anonymized, feature-extracted vectors may be utilized strictly to benchmark classification accuracy and detect emerging regional plant epidemics.
             </p>
           </div>
 

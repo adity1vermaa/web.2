@@ -143,7 +143,7 @@ export const DashboardPage: React.FC = () => {
               Notice any discoloration, lesions, or leaf wilting in the field?
             </h2>
             <p className="text-xs text-slate-300">
-              Upload or snap a high-resolution leaf photo for sub-second Gemini 3.7 Vision pathology analysis and targeted bio-treatments.
+              Upload or snap a high-resolution leaf photo for AI vision pathology analysis (Prototype) and targeted bio-treatments.
             </p>
           </div>
 

@@ -26,7 +26,7 @@ export const Footer: React.FC = () => {
             </p>
             <div className="flex items-center gap-2 text-xs text-emerald-400">
               <Cpu className="w-3.5 h-3.5" />
-              <span>Powered by Gemini Multimodal Vision</span>
+              <span>AgriVision AI Pathology System (Prototype)</span>
             </div>
           </div>
 

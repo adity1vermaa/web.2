@@ -72,9 +72,9 @@ export const AboutPage: React.FC = () => {
             <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400">
               <Eye className="w-5 h-5" />
             </div>
-            <h3 className="text-base font-bold text-white">Gemini Multimodal Vision</h3>
+            <h3 className="text-base font-bold text-white">Computer Vision Diagnostic Engine (Prototype)</h3>
             <p className="text-xs text-slate-400 leading-relaxed">
-              Fine-tuned on over 1.4 million peer-reviewed botanical pathology specimens across solanaceous, grain, legume, and horticultural crop cultivars.
+              Trained on extensive botanical pathology specimens across solanaceous, grain, legume, and horticultural crop cultivars with ongoing experimental evaluation.
             </p>
           </div>
 

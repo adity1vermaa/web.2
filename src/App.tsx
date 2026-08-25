@@ -33,6 +33,20 @@ const AppRoutes: React.FC = () => {
   const { currentPath, navigate } = useRouter();
   const { user, isAuthenticated, isAdmin, isLoading } = useAuth();
 
+  // Enforce route protection and redirection
+  React.useEffect(() => {
+    if (isLoading) return;
+
+    const publicPaths = ['/', '', '/about', '/privacy', '/terms', '/login', '/signup', '/forgot-password', '/onboarding'];
+    const isPublic = publicPaths.includes(currentPath);
+
+    if (!isAuthenticated && !isPublic) {
+      navigate('/login');
+    } else if (isAuthenticated && currentPath.startsWith('/admin') && !isAdmin) {
+      navigate('/dashboard');
+    }
+  }, [currentPath, isAuthenticated, isAdmin, isLoading, navigate]);
+
   // If initial auth session is being restored from Supabase, display clean loading state
   if (isLoading) {
     return (
